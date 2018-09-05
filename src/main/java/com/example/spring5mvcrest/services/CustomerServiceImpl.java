@@ -43,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
                     customerDTO.setCustomerUrl((getCustomerUrl(id)));
                     return customerDTO;
                 })
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
 
             return returnDTO;
 
-        }).orElseThrow(RuntimeException::new); //todo: refactor exception handling
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override

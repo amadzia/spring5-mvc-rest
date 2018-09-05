@@ -34,7 +34,4 @@ public class CategoryController {
                 categoryService.getCategoryByName(name), HttpStatus.OK
         );
     }
-
-
-
 }
