@@ -66,13 +66,17 @@ public class CustomerServiceImplTest {
         customer1.setLastName("West");
 
         when(customerRepository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(customer1));
+
         //when
         CustomerDTO customerDTO = customerService.getCustomerById(1L);
+
+        //then
         assertEquals("Mike", customerDTO.getFirstName());
     }
 
     @Test
     public void createNewCustomerTest() {
+
         //given
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setFirstName("Jim");

@@ -47,6 +47,7 @@ public class CustomerControllerTest {
 
     @Test
     public void getListOfCustomersTest() throws Exception {
+
         //given
         CustomerDTO customer1 = new CustomerDTO();
         customer1.setFirstName("Mike");
@@ -60,6 +61,7 @@ public class CustomerControllerTest {
 
         when(customerService.getAllCustomers()).thenReturn(Arrays.asList(customer1, customer2));
 
+        //when/then
         mockMvc.perform(get(CustomerController.BASE_URL)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -86,7 +88,8 @@ public class CustomerControllerTest {
 
 
     @Test
-    public void createCustomer() throws Exception {
+    public void createCustomerTest() throws Exception {
+
         //given
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setFirstName("Fred");
@@ -110,7 +113,8 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void updateCustomer() throws Exception {
+    public void updateCustomerTest() throws Exception {
+
         //given
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setFirstName("Fred");
@@ -147,6 +151,7 @@ public class CustomerControllerTest {
 
         when(customerService.patchCustomer(anyLong(), any(CustomerDTO.class))).thenReturn(returnDTO);
 
+        //when/then
         mockMvc.perform(patch(CustomerController.BASE_URL + "/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customerDTO)))
@@ -169,8 +174,10 @@ public class CustomerControllerTest {
     @Test
     public void getCustomerNotFoundExceptionTest() throws Exception {
 
+        //given
         when(customerService.getCustomerById(anyLong())).thenThrow(ResourceNotFoundException.class);
 
+        //when/then
         mockMvc.perform(get(CustomerController.BASE_URL + "/5550")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
